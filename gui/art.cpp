@@ -20,9 +20,19 @@ QPixmap itemArt(int skinIndex,QSize size) {
     glow.setColorAt(1,QColor(15,22,34,0));p.fillRect(QRectF(0,0,320,170),glow);
     p.translate(160,85);p.rotate(-14);p.translate(-160,-85);
     QPainterPath shape;
-    if(skin.tier==5) {
+    if(skin.weapon=="手套") {
+        shape.moveTo(105,140);shape.lineTo(86,93);shape.cubicTo(70,65,86,60,97,78);
+        shape.lineTo(100,39);shape.cubicTo(104,23,116,27,116,41);shape.lineTo(120,68);
+        shape.lineTo(127,27);shape.cubicTo(132,14,144,20,142,34);shape.lineTo(142,68);
+        shape.lineTo(154,33);shape.cubicTo(160,23,170,29,165,44);shape.lineTo(160,77);
+        shape.lineTo(179,54);shape.cubicTo(191,45,199,58,188,72);shape.lineTo(175,117);
+        shape.lineTo(167,140);shape.closeSubpath();
+    } else if(skin.tier==5) {
         shape.moveTo(45,99);shape.lineTo(105,83);shape.lineTo(250,54);
         shape.lineTo(218,90);shape.lineTo(115,101);shape.lineTo(56,119);shape.closeSubpath();
+    } else if(skin.weapon=="Glock" || skin.weapon=="USP" || skin.weapon=="P250" || skin.weapon=="Desert Eagle") {
+        shape.moveTo(91,62);shape.lineTo(232,62);shape.lineTo(232,87);shape.lineTo(155,90);
+        shape.lineTo(144,135);shape.lineTo(105,132);shape.lineTo(114,90);shape.lineTo(91,87);shape.closeSubpath();
     } else {
         // 原创抽象武器剪影，不使用商业游戏贴图。
         shape.moveTo(30,80);shape.lineTo(74,66);shape.lineTo(88,76);shape.lineTo(177,76);
@@ -31,6 +41,9 @@ QPixmap itemArt(int skinIndex,QSize size) {
         shape.lineTo(158,128);shape.lineTo(140,125);shape.lineTo(143,97);
         shape.lineTo(124,97);shape.lineTo(117,120);shape.lineTo(103,116);shape.lineTo(109,94);
         shape.lineTo(82,91);shape.lineTo(39,106);shape.closeSubpath();
+    }
+    if(skin.weapon=="AWP") {
+        shape.addRoundedRect(QRectF(126,51,64,12),3,3);shape.addRect(QRectF(149,63,7,15));
     }
     QLinearGradient paint(50,65,245,110);paint.setColorAt(0,color.darker(170));
     paint.setColorAt(.45,color.lighter(140));paint.setColorAt(1,color.darker(120));
