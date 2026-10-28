@@ -25,6 +25,7 @@ class InventoryPage : public QWidget {
     QComboBox* rarity_;
     QLabel* count_;
     std::uint64_t selectedId() const;
+    void inspect();
 public:
     explicit InventoryPage(Session& session,QWidget* parent=nullptr);
     void refresh();

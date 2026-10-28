@@ -4,6 +4,9 @@
 #include <QHeaderView>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QDialog>
+#include <QFormLayout>
+#include <QDialogButtonBox>
 namespace arsenal {
 namespace {
 class NumericCell : public QTableWidgetItem {
@@ -36,6 +39,7 @@ InventoryPage::InventoryPage(Session& s,QWidget* parent):QWidget(parent),session
     auto* sell=new QPushButton("出售选中饰品");sell->setObjectName("sellSelected");actions->addWidget(sell);
     auto* low=new QPushButton("批量出售低等级");actions->addWidget(low);actions->addStretch();
     auto* exportButton=new QPushButton("导出 CSV");actions->addWidget(exportButton);box->addLayout(actions);
+    connect(table_,&QTableWidget::cellDoubleClicked,this,[this]{inspect();});
     connect(search_,&QLineEdit::textChanged,this,[this]{refresh();});
     connect(rarity_,&QComboBox::currentIndexChanged,this,[this]{refresh();});
     connect(&s,&Session::changed,this,&InventoryPage::refresh);
@@ -51,6 +55,24 @@ InventoryPage::InventoryPage(Session& s,QWidget* parent):QWidget(parent),session
         const auto path=QFileDialog::getSaveFileName(this,"导出背包","arsenal-inventory.csv","CSV (*.csv)");
         if(!path.isEmpty()) session_.exportCsv(path);
     });refresh();
+}
+void InventoryPage::inspect() {
+    const auto id=selectedId();
+    for(const auto& i:session_.profile().inventory) {
+        if(i.id!=id) continue;
+        QDialog dialog(this);dialog.setWindowTitle("饰品检视");dialog.resize(600,520);
+        auto* box=new QVBoxLayout(&dialog);box->setContentsMargins(26,24,26,24);
+        auto* name=new QLabel(QString::fromStdString(itemName(i)));name->setObjectName("sectionTitle");box->addWidget(name);
+        auto* picture=new QLabel;picture->setAlignment(Qt::AlignCenter);picture->setPixmap(itemArt(i.skin,QSize(520,260)));box->addWidget(picture);
+        auto* form=new QFormLayout;
+        auto row=[&](const QString& key,const QString& val){form->addRow(key,new QLabel(val));};
+        row("稀有度",QString::fromStdString(tierName(catalog()[static_cast<std::size_t>(i.skin)].tier)));
+        row("外观",QString::fromStdString(wearName(i.wear))+" / "+QString::number(i.wear,'f',8));
+        row("模板编号",QString::number(i.pattern));row("当前估值",QString::number(value(i))+" 积分");
+        row("保护状态",i.locked?"已锁定":"未锁定");box->addLayout(form);
+        auto* close=new QDialogButtonBox(QDialogButtonBox::Close);connect(close,&QDialogButtonBox::rejected,&dialog,&QDialog::reject);box->addWidget(close);
+        dialog.exec();break;
+    }
 }
 std::uint64_t InventoryPage::selectedId() const {
     const int row=table_->currentRow();if(row<0) return 0;

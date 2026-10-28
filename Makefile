@@ -53,7 +53,7 @@ dist:
 	@mkdir -p dist
 	tar --exclude=./build --exclude=./dist --exclude=./.git --exclude='*.sav*' -czf dist/arsenal-source.tar.gz .
 help:
-	@echo 'make [-j4] | run | demo | test | debug | release | sanitize | clean | dist'
+	@echo 'make [-j4] (Qt GUI) | run | cli-run | demo | test | core-test | gui-test | check-deps | debug | release | sanitize | clean | dist'
 -include $(OBJECTS:.o=.d) $(BUILD)/test.d
 
 # Qt桌面版：手写Make规则，展示moc、rcc、自动依赖与系统第三方库链接。
