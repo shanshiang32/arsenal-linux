@@ -1,0 +1,8 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label":"Make: desktop","type":"process","command":"make","args":["-j4"],"options":{"cwd":"${workspaceFolder}"},"group":{"kind":"build","isDefault":true},"problemMatcher":["$gcc"]},
+    {"label":"Make: debug","type":"process","command":"make","args":["-j4","debug"],"options":{"cwd":"${workspaceFolder}"},"problemMatcher":["$gcc"]},
+    {"label":"Make: test","type":"process","command":"make","args":["test"],"options":{"cwd":"${workspaceFolder}"},"group":"test","problemMatcher":["$gcc"]}
+  ]
+}
