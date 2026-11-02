@@ -1,0 +1,1 @@
+arsenal [--save PATH] [--seed N] [--no-color] [--no-animation]
