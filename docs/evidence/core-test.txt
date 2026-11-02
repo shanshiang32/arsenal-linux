@@ -1,0 +1,12 @@
+g++ -Iinclude -std=c++17 -Wall -Wextra -Wpedantic -Wconversion -MMD -MP -O2 -DNDEBUG -c src/engine.cpp -o build/release/engine.o
+g++ -Iinclude -std=c++17 -Wall -Wextra -Wpedantic -Wconversion -MMD -MP -O2 -DNDEBUG -c src/model.cpp -o build/release/model.o
+g++ -Iinclude -std=c++17 -Wall -Wextra -Wpedantic -Wconversion -MMD -MP -O2 -DNDEBUG -c src/storage.cpp -o build/release/storage.o
+g++ -Iinclude -std=c++17 -Wall -Wextra -Wpedantic -Wconversion -MMD -MP -O2 -DNDEBUG -c tests/test.cpp -o build/release/test.o
+g++ -Iinclude -std=c++17 -Wall -Wextra -Wpedantic -Wconversion -MMD -MP -O2 -DNDEBUG -c src/main.cpp -o build/release/main.o
+g++ -Iinclude -std=c++17 -Wall -Wextra -Wpedantic -Wconversion -MMD -MP -O2 -DNDEBUG -c src/ui.cpp -o build/release/ui.o
+g++ build/release/engine.o build/release/model.o build/release/storage.o build/release/test.o  -o build/release/test_runner
+g++ build/release/engine.o build/release/main.o build/release/model.o build/release/storage.o build/release/ui.o  -o build/release/arsenal
+./build/release/test_runner
+PASS: 39 checks (including 100000 deterministic draws)
+python3 tests/cli_test.py ./build/release/arsenal
+PASS: CLI persistence, input validation, simulation isolation, corrupt-save protection

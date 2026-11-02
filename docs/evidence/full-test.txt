@@ -1,0 +1,26 @@
+./build/release/test_runner
+g++ build/release/engine.o build/release/model.o build/release/storage.o build/release/gui/art.o build/release/gui/inventory.o build/release/gui/reveal.o build/release/gui/session.o build/release/gui/statistics.o build/release/gui/store.o build/release/gui/window.o build/release/gui/moc_session.o build/release/gui/moc_window.o build/release/gui/moc_reveal.o build/release/gui/resources.o build/release/gui/main.o  -L/workspace/qt6-local/root/usr/lib/x86_64-linux-gnu -lQt6Widgets -lQt6Gui -lQt6Core  -o build/release/arsenal-desktop
+g++ build/release/engine.o build/release/model.o build/release/storage.o build/release/gui/art.o build/release/gui/inventory.o build/release/gui/reveal.o build/release/gui/session.o build/release/gui/statistics.o build/release/gui/store.o build/release/gui/window.o build/release/gui/moc_session.o build/release/gui/moc_window.o build/release/gui/moc_reveal.o build/release/gui/resources.o build/release/gui/gui_test.o  -L/workspace/qt6-local/root/usr/lib/x86_64-linux-gnu -lQt6Widgets -lQt6Gui -lQt6Core  -L/workspace/qt6-local/root/usr/lib/x86_64-linux-gnu -lQt6Test -lQt6Core  -o build/release/gui_tests
+PASS: 39 checks (including 100000 deterministic draws)
+python3 tests/cli_test.py ./build/release/arsenal
+PASS: CLI persistence, input validation, simulation isolation, corrupt-save protection
+QT_QPA_PLATFORM=offscreen ./build/release/gui_tests
+********* Start testing of GuiTests *********
+Config: Using QtTest library 6.8.2, Qt 6.8.2 (x86_64-little_endian-lp64 shared (dynamic) release build; by GCC 14.2.0), debian 13
+PASS   : GuiTests::initTestCase()
+PASS   : GuiTests::sessionTransactions()
+PASS   : GuiTests::failedSaveDoesNotCommit()
+Fontconfig error: No writable cache directories
+QWARN  : GuiTests::multiReveal() This plugin does not support propagateSizeHints()
+QWARN  : GuiTests::multiReveal() This plugin does not support propagateSizeHints()
+QWARN  : GuiTests::multiReveal() This plugin does not support propagateSizeHints()
+QWARN  : GuiTests::multiReveal() This plugin does not support propagateSizeHints()
+QWARN  : GuiTests::multiReveal() This plugin does not support propagateSizeHints()
+QWARN  : GuiTests::multiReveal() This plugin does not support propagateSizeHints()
+PASS   : GuiTests::multiReveal()
+QWARN  : GuiTests::desktopInteraction() This plugin does not support propagateSizeHints()
+QWARN  : GuiTests::desktopInteraction() This plugin does not support propagateSizeHints()
+PASS   : GuiTests::desktopInteraction()
+PASS   : GuiTests::cleanupTestCase()
+Totals: 6 passed, 0 failed, 0 skipped, 0 blacklisted, 10267ms
+********* Finished testing of GuiTests *********
