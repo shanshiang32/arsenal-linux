@@ -113,4 +113,4 @@ git tag
 - [修订汇报PPT](docs/submission/arsenal-linux-presentation-revised.pptx)
 - [实验报告Word版](docs/submission/小组实验报告.docx)
 
-本次未提供老师的报告模板及课程课件原文，因此不能声称逐页核对或完全符合指定模板。
+Word报告已按上传的2026教师模板填入七节正文和五人分工表；学期、日期和个人心得待补。课程课件原文尚未提供。
