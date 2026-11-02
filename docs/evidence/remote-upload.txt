@@ -1,0 +1,28 @@
+Actual remote verification after initial successful upload; repeated pushes test idempotency.
+2026-11-02T07:13:37.432106+00:00
+$ git push -u origin main
+branch 'main' set up to track 'origin/main'.
+Everything up-to-date
+exit=0
+$ git push origin feature/gui-quality feature/qt-desktop feature/quality feature/statistics
+Everything up-to-date
+exit=0
+$ git push origin --tags
+Everything up-to-date
+exit=0
+$ git rev-parse HEAD
+6de784ffffce2418b2006a31ba28b9aef5007f03
+exit=0
+$ git ls-remote origin refs/heads/main refs/heads/feature/* refs/tags/*
+f1eb572a99caabb1ea4e87a018d0bf39015ca745	refs/heads/feature/gui-quality
+5eb93e822c5ed604d3a7a4f20e681fc19e553d3a	refs/heads/feature/qt-desktop
+49c77c25e68358e7bfbbeca1a13184d4dcda6153	refs/heads/feature/quality
+890e714217e263b901b6d2f70d52dbd432cacd14	refs/heads/feature/statistics
+6de784ffffce2418b2006a31ba28b9aef5007f03	refs/heads/main
+db99eea075b0457a48960b5d5b8f3e947b306b10	refs/tags/v0.1-core
+6f417871b3311b0abf93e4bb166c835a83d2bde1	refs/tags/v1.0
+c99877f010e25ce7cc55f6587cdcee5d461588e9	refs/tags/v1.0^{}
+5d8a794a99a06f366eefd01a29d72a998cece44b	refs/tags/v2.0
+09dd57cea12d4863b914d9cb01680906887b2852	refs/tags/v2.0^{}
+exit=0
+PASS: local HEAD equals remote main: 6de784ffffce2418b2006a31ba28b9aef5007f03
